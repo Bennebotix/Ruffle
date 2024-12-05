@@ -55,7 +55,7 @@
         var new_zip = new JSZip();
         new_zip.loadAsync(atob(findGetParameter('data')))
         .then(function(zip) {
-            play(blobSWF(zip.file("hello.txt")));
+            play(blobSWF(zip.file('game.swf')));
         });
     </script>
 
