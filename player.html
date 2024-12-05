@@ -41,14 +41,18 @@
             return result;
         }
 
-        window.RufflePlayer = window.RufflePlayer || {};
+        function play(url) {
+            window.RufflePlayer = window.RufflePlayer || {};
+    
+            window.addEventListener("DOMContentLoaded", () => {
+                let ruffle = window.RufflePlayer.newest();
+                let player = ruffle.createPlayer();
+                document.body.appendChild(player);
+                player.ruffle().load(url);
+            });
+        }
 
-        window.addEventListener("DOMContentLoaded", () => {
-            let ruffle = window.RufflePlayer.newest();
-            let player = ruffle.createPlayer();
-            document.body.appendChild(player);
-            player.ruffle().load(parseSWF(findGetParameter('data')));
-        });
+        play(parseSWF(findGetParameter('data')));
     </script>
 
     <script src="ruffle.js"></script>
