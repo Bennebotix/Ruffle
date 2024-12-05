@@ -28,7 +28,7 @@
     let ruffle = window.RufflePlayer.newest();
     let player = ruffle.createPlayer();
     document.body.appendChild(player);
-    player.ruffle().load('https://locker.phinugamma.org/swf/' + findGetParameter('path'));
+    player.ruffle().load(findGetParameter('path'));
   });
 </script>
 <script src="ruffle.js"></script>
