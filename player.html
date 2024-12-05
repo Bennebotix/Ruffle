@@ -28,7 +28,7 @@
     let ruffle = window.RufflePlayer.newest();
     let player = ruffle.createPlayer();
     document.body.appendChild(player);
-    player.ruffle().load('/games/' + findGetParameter('path'));
+    player.ruffle().load('/games/' + findGetParameter('path') + '.swf');
   });
 </script>
 <script src="ruffle.js"></script>
