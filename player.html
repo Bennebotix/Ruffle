@@ -37,8 +37,8 @@
     <input type="file" id="myfile" name="myfile">
     
     <script>
-document.querySelector("input").addEventListener("change", (e) => {
-    encodeAndPlay(e.files[0])
+document.querySelector("input").addEventListener("change", () => {
+    encodeAndPlay(document.querySelector("input").files[0])
 });
 
 
