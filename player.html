@@ -40,6 +40,7 @@
                 let swf = zip.file('game.swf');
                 const blob = new Blob([swf], { type: 'application/x-shockwave-flash' });
                 const url = URL.createObjectURL(blob);
+                console.log(url)
             
                 window.RufflePlayer = window.RufflePlayer || {};
         
