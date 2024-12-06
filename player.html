@@ -37,19 +37,16 @@
     
     <script>
         document.querySelector('input').addEventListener('change', function(e) {
-            alert('Changed with files: ' + JSON.stringify(e.target.files, 1, 2));
             var file = e.target.files[0];
             if (!file) return;
 
             var reader = new FileReader();
             reader.onload = function(e) {
-                alert('Reading with files: ' + JSON.stringify(e.target.result, 1, 2));
                 window.RufflePlayer = window.RufflePlayer || {};
         
                 let ruffle = window.RufflePlayer.newest();
                 let player = ruffle.createPlayer();
-                let container = document.getElementById("container");
-                container.appendChild(player);
+                document.body.appendChild(player);
                 var flashMovie = new Uint8Array(e.target.result);
                 rufflePlayer.setAttribute('baseurl', window.location.href);
                 rufflePlayer.setAttribute('swf', flashMovie);
