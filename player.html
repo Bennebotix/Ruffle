@@ -28,7 +28,7 @@
     <button onclick="decdeAndPlay()">Run</button>
     
     <script>
-        async function decodeAndPlay(data) {
+        async function decodeAndPlay() {
             var new_zip = new JSZip();
             new_zip.loadAsync(atob(await navigator.clipboard.readText()))
             .then(function(zip) {
