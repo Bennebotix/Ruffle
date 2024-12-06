@@ -42,13 +42,17 @@
 
             var reader = new FileReader();
             reader.onload = function(e) {
-                var rufflePlayer = document.createElement('ruffle-player');
-
-                var flashMovie = new Uint8Array(e.target.result);
-                rufflePlayer.setAttribute('baseurl', window.location.href);
-                rufflePlayer.setAttribute('swf', flashMovie);
-
-                document.body.appendChild(rufflePlayer);
+                window.RufflePlayer = window.RufflePlayer || {};
+            
+                window.addEventListener("DOMContentLoaded", () => {
+                    let ruffle = window.RufflePlayer.newest();
+                    let player = ruffle.createPlayer();
+                    let container = document.getElementById("container");
+                    container.appendChild(player);
+                    var flashMovie = new Uint8Array(e.target.result);
+                    rufflePlayer.setAttribute('baseurl', window.location.href);
+                    rufflePlayer.setAttribute('swf', flashMovie);
+                });
             };
 
             reader.readAsArrayBuffer(file);
