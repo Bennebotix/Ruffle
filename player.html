@@ -42,13 +42,10 @@
             decodeAndPlay(data);
         }
         
-        function decodeAndPlay(data) {
-            var new_zip = new JSZip();
-            new_zip.loadAsync(atob(data))
+        function decodeAndPlay(file) {
+            new JSZip().loadAsync(file)
             .then(function(zip) {
-                let swf = zip.file('game.swf');
-                const blob = new Blob([swf], { type: 'application/x-shockwave-flash' });
-                const url = URL.createObjectURL(blob);
+                const url = URL.createObjectURL(new Blob([zip.file('game.swf')], { type: 'application/x-shockwave-flash' }));
                 console.log(url)
             
                 window.RufflePlayer = window.RufflePlayer || {};
