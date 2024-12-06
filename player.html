@@ -36,17 +36,6 @@
     <input type="file" id="myfile" name="myfile">
     
     <script>
-function returnFileSize(number) {
-  if (number < 1e3) {
-    return `${number} bytes`;
-  } else if (number >= 1e3 && number < 1e6) {
-    return `${(number / 1e3).toFixed(1)} KB`;
-  } else {
-    return `${(number / 1e6).toFixed(1)} MB`;
-  }
-}
-        
-        
         document.querySelector('input').addEventListener('change', function(e) {
             var file = e.target.files[0];
             if (!file) return;
