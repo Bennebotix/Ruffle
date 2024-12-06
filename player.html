@@ -1,60 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+  * {
+    margin: 0px;
+    border: none;
+    padding: 0px;
+    width: 100dvw;
+    height: 100dvh;
+  }
+</style>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruffle Player</title>
-    <style>
-        *:not(input) {
-            margin: 0px;
-            border: none;
-            padding: 0px;
-            width: 100dvw;
-            height: 100dvh;
-        }
+<script>
+  function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+      .substr(1)
+      .split("&")
+      .forEach(function (item) {
+      tmp = item.split("=");
+      if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    });
+    return result;
+  }
 
-        input {
-            position: absolute;
-            z-index: 20;
-        }
+  window.RufflePlayer = window.RufflePlayer || {};
 
-        ruffle-player {
-            z-index: 10;
-        }
-    </style>
-</head>
-
-<body>
-    <script src="https://cdn.jsdelivr.net/npm/eruda@3.4.1/eruda.min.js"></script>
-    <script>
-        eruda.init();
-    </script>
-    
-    <script src="ruffle.js"></script>
-
-    <input type="file" id="myfile" name="myfile">
-    
-    <script>
-        document.querySelector('input').addEventListener('change', function(e) {
-            var file = e.target.files[0];
-            if (!file) return;
-
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                window.RufflePlayer = window.RufflePlayer || {};
-        
-                let ruffle = window.RufflePlayer.newest();
-                let player = ruffle.createPlayer();
-                document.body.appendChild(player);
-                var flashMovie = new Uint8Array(e.target.result);
-                player.setAttribute('baseurl', window.location.href);
-                player.setAttribute('swf', flashMovie);
-            };
-
-            reader.readAsArrayBuffer(file);
-        });
-    </script>
-</body>
-
-</html>
+  window.addEventListener("DOMContentLoaded", () => {
+    let ruffle = window.RufflePlayer.newest();
+    let player = ruffle.createPlayer();
+    document.body.appendChild(player);
+    player.ruffle().load('/games/' + findGetParameter('path') + '.swf');
+  });
+</script>
+<script src="ruffle.js"></script>
