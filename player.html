@@ -32,24 +32,10 @@
     </script>
     
     <script src="ruffle.js"></script>
-    <script src="jszip.js"></script>
 
     <input type="file" id="myfile" name="myfile">
     
     <script>
-document.querySelector("input").addEventListener("change", () => {
-    encodeAndPlay(document.querySelector("input").files[0])
-});
-
-
-const fileTypes = [
-  "application/x-shockwave-flash"
-];
-
-function validFileType(file) {
-  return fileTypes.includes(file.type);
-}
-
 function returnFileSize(number) {
   if (number < 1e3) {
     return `${number} bytes`;
@@ -60,23 +46,30 @@ function returnFileSize(number) {
   }
 }
         
-        function encodeAndPlay(file) {
-            new JSZip().loadAsync(file)
-            .then(function(zip) {
-                const url = URL.createObjectURL(new Blob([zip.file('game.swf')], { type: 'application/x-shockwave-flash' }));
-                console.log(url)
-            
-                window.RufflePlayer = window.RufflePlayer || {};
         
-                window.addEventListener("DOMContentLoaded", () => {
-                    let ruffle = window.RufflePlayer.newest();
-                    let player = ruffle.createPlayer();
-                    player.classList.add('player');
-                    document.body.appendChild(player);
-                    player.ruffle().load(url);
-                });
-            });
-        }
+        document.querySelector('fileInput').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (!file) return;
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var flashContainer = document.getElementById('flashContainer');
+                flashContainer.innerHTML = ''; // Clear previous content
+
+                var rufflePlayer = document.createElement('ruffle-player');
+
+                rufflePlayer.style.width = '100%';
+                rufflePlayer.style.height = '100%';
+
+                var flashMovie = new Uint8Array(e.target.result);
+                rufflePlayer.setAttribute('baseurl', window.location.href);
+                rufflePlayer.setAttribute('swf', flashMovie);
+
+                document.body.appendChild(rufflePlayer);
+            };
+
+            reader.readAsArrayBuffer(file);
+        });
     </script>
 </body>
 
