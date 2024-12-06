@@ -1,4 +1,4 @@
-crypto.subtle.digest('SHA-256', new TextEncoder().encode(((a)=>a?a:'')(getCookie('key')))).then(r=>{
+crypto.subtle.digest('SHA-256', new TextEncoder().encode(((a)=>a?a:'')((a=>decodeURIComponent(!!a?a.toString().replace(/^[^=]+./,""):""))(RegExp("key=[^;]+").exec(document.cookie))))).then(r=>{
     if (Array.from(new Uint8Array(r)).map(b => b.toString(16).padStart(2, '0')).join('') !== 'f6a5a99f56ff082b24369731f69fbb764ca33d2ef817a534cf6ca4d2d5dd1a7d') {
         window.stop();
         document.documentElement.innerHTML = '';
@@ -10,11 +10,3 @@ crypto.subtle.digest('SHA-256', new TextEncoder().encode(((a)=>a?a:'')(getCookie
     }
 })
 
-// async function sha256(message) {
-//     return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(message)))).map(b => b.toString(16).padStart(2, '0')).join('');
-// }
-
-function getCookie(cookiename) {
-    var cookiestring=RegExp(cookiename+"=[^;]+").exec(document.cookie);
-    return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
-}
