@@ -1,6 +1,8 @@
-if (sha256(getCookie('key')) != 'f6a5a99f56ff082b24369731f69fbb764ca33d2ef817a534cf6ca4d2d5dd1a7d') {  
-    window.location = 'data:text/html,no';
-}
+sha256(getCookie('key')).then(res => {
+    if (res != 'f6a5a99f56ff082b24369731f69fbb764ca33d2ef817a534cf6ca4d2d5dd1a7d') {  
+        window.location = 'data:text/html,no';
+    }
+})
 
 async function sha256(message) {
     const msgBuffer = new TextEncoder().encode(message);                    
