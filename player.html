@@ -29,7 +29,7 @@
     
     <script>
         async function getClipboard() {
-            decodeAndPlay(await navigator.clipboard.readText());
+            alert(await navigator.clipboard.readText());
         }
         
         function decodeAndPlay(data) {
