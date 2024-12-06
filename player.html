@@ -24,47 +24,28 @@
     
     <script src="ruffle.js"></script>
     <script src="jszip.js"></script>
+
+    <button onclick="go()">Run</button>
     
     <script>
-        function blobSWF(swf) {
-            const blob = new Blob([swf], { type: 'application/x-shockwave-flash' });
-            const url = URL.createObjectURL(blob);
-            return url;
-        }
-
-        function findGetParameter(parameterName) {
-            var result = null,
-                tmp = [];
-            location.search
-                .substr(1)
-                .split("&")
-                .forEach(function(item) {
-                    tmp = item.split("=");
-                    if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-                });
-            return result;
-        }
-
-        function play(url) {
-            window.RufflePlayer = window.RufflePlayer || {};
-    
-            window.addEventListener("DOMContentLoaded", () => {
-                let ruffle = window.RufflePlayer.newest();
-                let player = ruffle.createPlayer();
-                document.body.appendChild(player);
-                player.ruffle().load(url);
-            });
-        }
-
-        function decodeAndPlay(data) {
+        async function decodeAndPlay(data) {
             var new_zip = new JSZip();
-            new_zip.loadAsync(atob(data))
+            new_zip.loadAsync(atob(await navigator.clipboard.readText()))
             .then(function(zip) {
-                play(blobSWF(zip.file('game.swf')));
+                let swf = zip.file('game.swf');
+                const blob = new Blob([swf], { type: 'application/x-shockwave-flash' });
+                const url = URL.createObjectURL(blob);
+            
+                window.RufflePlayer = window.RufflePlayer || {};
+        
+                window.addEventListener("DOMContentLoaded", () => {
+                    let ruffle = window.RufflePlayer.newest();
+                    let player = ruffle.createPlayer();
+                    document.body.appendChild(player);
+                    player.ruffle().load(url);
+                });
             });
         }
-
-        decodeAndPlay(findGetParameter('data'));
     </script>
 </body>
 
