@@ -1,5 +1,6 @@
 sha256(((a)=>a?a:'')(getCookie('key'))).then(res => {
-    if (res !== 'f6a5a99f56ff082b24369731f69fbb764ca33d2ef817a534cf6ca4d2d5dd1a7d') {  
+    if (res !== 'f6a5a99f56ff082b24369731f69fbb764ca33d2ef817a534cf6ca4d2d5dd1a7d') {
+        alert('wrong')
         window.location = 'data:text/html,';
     }
 })
