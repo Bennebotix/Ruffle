@@ -25,12 +25,16 @@
     <script src="ruffle.js"></script>
     <script src="jszip.js"></script>
 
-    <button onclick="decodeAndPlay()">Run</button>
+    <button onclick="getClipboard()">Run</button>
     
     <script>
-        async function decodeAndPlay() {
+        async function getClipboard() {
+            decodeAndPlay(await navigator.clipboard.readText());
+        }
+        
+        function decodeAndPlay(data) {
             var new_zip = new JSZip();
-            new_zip.loadAsync(atob(await navigator.clipboard.readText()))
+            new_zip.loadAsync(atob(data))
             .then(function(zip) {
                 let swf = zip.file('game.swf');
                 const blob = new Blob([swf], { type: 'application/x-shockwave-flash' });
