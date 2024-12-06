@@ -34,15 +34,35 @@
     <script src="ruffle.js"></script>
     <script src="jszip.js"></script>
 
-    <button onclick="getClipboard()">Run</button>
+    <input type="file" id="myfile" name="myfile">
     
     <script>
-        async function getClipboard() {
-            let data = await navigator.clipboard.readText();
-            decodeAndPlay(data);
-        }
+const input = document.querySelector("input");
+
+input.addEventListener("change", (files) => {
+    encodeAndPlay(\input.files[0])
+});
+
+
+const fileTypes = [
+  "application/x-shockwave-flash"
+];
+
+function validFileType(file) {
+  return fileTypes.includes(file.type);
+}
+
+function returnFileSize(number) {
+  if (number < 1e3) {
+    return `${number} bytes`;
+  } else if (number >= 1e3 && number < 1e6) {
+    return `${(number / 1e3).toFixed(1)} KB`;
+  } else {
+    return `${(number / 1e6).toFixed(1)} MB`;
+  }
+}
         
-        function decodeAndPlay(file) {
+        function encodeAndPlay(file) {
             new JSZip().loadAsync(file)
             .then(function(zip) {
                 const url = URL.createObjectURL(new Blob([zip.file('game.swf')], { type: 'application/x-shockwave-flash' }));
