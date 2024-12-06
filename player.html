@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruffle Player</title>
     <style>
-        * {
+        *:not(button) {
             margin: 0px;
             border: none;
             padding: 0px;
-            width: 100vw;
-            height: 100vh;
+            width: 100dvw;
+            height: 100dvh;
+        }
+
+        button {
+            position: absolute;
+            z-index: 20;
+        }
+
+        .player {
+            z-index: 10;
         }
     </style>
 </head>
@@ -47,6 +56,7 @@
                 window.addEventListener("DOMContentLoaded", () => {
                     let ruffle = window.RufflePlayer.newest();
                     let player = ruffle.createPlayer();
+                    player.classList.add('player');
                     document.body.appendChild(player);
                     player.ruffle().load(url);
                 });
