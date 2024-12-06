@@ -1,4 +1,4 @@
-if (sha256(getCookie(document.cookie)) != 'b81ae6d606ee9295cab3e2cfad84fba393eccb03408a5b2acbf89b3e80b7882b') {  
+if (sha256(getCookie('key')) != 'b81ae6d606ee9295cab3e2cfad84fba393eccb03408a5b2acbf89b3e80b7882b') {  
     window.location = 'data:text/html,no';
 }
 
