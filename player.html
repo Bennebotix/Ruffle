@@ -48,8 +48,8 @@
                 let player = ruffle.createPlayer();
                 document.body.appendChild(player);
                 var flashMovie = new Uint8Array(e.target.result);
-                rufflePlayer.setAttribute('baseurl', window.location.href);
-                rufflePlayer.setAttribute('swf', flashMovie);
+                player.setAttribute('baseurl', window.location.href);
+                player.setAttribute('swf', flashMovie);
             };
 
             reader.readAsArrayBuffer(file);
