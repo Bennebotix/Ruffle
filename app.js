@@ -10,7 +10,7 @@ sha256(((a)=>a?a:'')(getCookie('key'))).then(res => {
     }
 })
 
-let sha256 = async message => {
+async function sha256(message) {
     return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(message)))).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
