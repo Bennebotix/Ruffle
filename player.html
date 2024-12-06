@@ -47,19 +47,13 @@ function returnFileSize(number) {
 }
         
         
-        document.querySelector('fileInput').addEventListener('change', function(e) {
+        document.querySelector('input').addEventListener('change', function(e) {
             var file = e.target.files[0];
             if (!file) return;
 
             var reader = new FileReader();
             reader.onload = function(e) {
-                var flashContainer = document.getElementById('flashContainer');
-                flashContainer.innerHTML = ''; // Clear previous content
-
                 var rufflePlayer = document.createElement('ruffle-player');
-
-                rufflePlayer.style.width = '100%';
-                rufflePlayer.style.height = '100%';
 
                 var flashMovie = new Uint8Array(e.target.result);
                 rufflePlayer.setAttribute('baseurl', window.location.href);
