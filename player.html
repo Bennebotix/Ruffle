@@ -24,6 +24,25 @@
 
   window.RufflePlayer = window.RufflePlayer || {};
 
+  window.RufflePlayer.config = {
+    "publicPath": undefined,
+    "polyfills": true,
+    "autoplay": "on",
+    "unmuteOverlay": "hidden",
+    "backgroundColor": "#000000",
+    "letterbox": "fullscreen",
+    "warnOnUnsupportedContent": true,
+    "contextMenu": false,
+    "showSwfDownload": false,
+    "upgradeToHttps": window.location.protocol === "https:",
+    "maxExecutionDuration": {"secs": 15, "nanos": 0},
+    "logLevel": "error",
+    "base": null,
+    "menu": true,
+    "salign": "",
+    "scale": "showAll",
+  };
+
   window.addEventListener("DOMContentLoaded", () => {
     let ruffle = window.RufflePlayer.newest();
     let player = ruffle.createPlayer();
